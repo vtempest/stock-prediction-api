@@ -1,15 +1,7 @@
-# todo 
-more facilities
-new graphs ensemble proophet
-
-# Energy Prediction System
-![logo](https://i.imgur.com/GcTU5Wy.png)
-
-A comprehensive machine learning system for predicting energy consumption using multiple models and advanced time series analysis techniques.
 
 ## Overview
 
-This system combines multiple machine learning approaches to predict energy consumption with high accuracy. It uses an ensemble of models including Prophet for time series forecasting, Random Forest, Ridge Regression, and XGBoost for pattern recognition, along with advanced feature engineering and cross-validation techniques.
+This system uses an ensemble of models including Prophet for time series forecasting, Random Forest, Ridge Regression, and XGBoost for pattern recognition, along with advanced feature engineering and cross-validation techniques.
 
 ## Key Features
 
