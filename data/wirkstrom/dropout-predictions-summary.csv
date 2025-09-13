@@ -1,2 +1,0 @@
-month,predictions_count,prophet_accuracy,xgb_accuracy,ensemble_accuracy,prophet_mae,xgb_mae,ensemble_mae
-2025-06,28,-81.03174879781574,66.07433936900725,70.2027045860135,108.90757000876306,18.978306176321848,16.847656407275775
