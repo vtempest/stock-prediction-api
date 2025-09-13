@@ -1,0 +1,23 @@
+{
+  "id": "functions/server/xgboost",
+  "title": "xgboost",
+  "description": "Documentation / server/xgboost",
+  "source": "@site/docs/functions/server/xgboost.md",
+  "sourceDirName": "functions/server",
+  "slug": "/functions/server/xgboost",
+  "permalink": "/functions/server/xgboost",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "default",
+  "previous": {
+    "title": "xgboost-1",
+    "permalink": "/functions/server/xgboost-1"
+  },
+  "next": {
+    "title": "Feature Engineering",
+    "permalink": "/research/Feature Engineering"
+  }
+}

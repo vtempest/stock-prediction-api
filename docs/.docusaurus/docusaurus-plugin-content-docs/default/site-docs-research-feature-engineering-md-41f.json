@@ -1,0 +1,23 @@
+{
+  "id": "research/Feature Engineering",
+  "title": "Feature Engineering",
+  "description": "Features Used in Prophet Model",
+  "source": "@site/docs/research/Feature Engineering.md",
+  "sourceDirName": "research",
+  "slug": "/research/Feature Engineering",
+  "permalink": "/research/Feature Engineering",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "default",
+  "previous": {
+    "title": "modules",
+    "permalink": "/functions/modules"
+  },
+  "next": {
+    "title": "Comparison of Prediction Models",
+    "permalink": "/research/Model Comparison"
+  }
+}

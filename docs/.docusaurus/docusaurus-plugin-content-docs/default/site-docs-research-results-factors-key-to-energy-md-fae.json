@@ -1,0 +1,23 @@
+{
+  "id": "research/Results - Factors Key to Energy",
+  "title": "🔬 Results Report: Factors for Biogas Output Prediction",
+  "description": "Lead Researcher:",
+  "source": "@site/docs/research/Results - Factors Key to Energy.md",
+  "sourceDirName": "research",
+  "slug": "/research/Results - Factors Key to Energy",
+  "permalink": "/research/Results - Factors Key to Energy",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "default",
+  "previous": {
+    "title": "Comparison of Prediction Models",
+    "permalink": "/research/Model Comparison"
+  },
+  "next": {
+    "title": "Variables in Biogas Prediction (Case Studies)",
+    "permalink": "/research/Variables Biogas Output"
+  }
+}

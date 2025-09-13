@@ -1,0 +1,227 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Biogas Energy Output Prediction API",
+    "version": "1.0.0",
+    "description": "API for training models and predicting biogas energy output based on weather data"
+  },
+  "paths": {
+    "/": {
+      "get": {
+        "summary": "Health check",
+        "description": "Returns the API status",
+        "responses": {
+          "200": {
+            "description": "API health status",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": { "type": "string" },
+                    "message": { "type": "string" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/train": {
+      "post": {
+        "summary": "Train prediction model",
+        "description": "Train an XGBoost model using historical facility and weather data",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["folder", "datapath"],
+                "properties": {
+                  "folder": {
+                    "type": "string",
+                    "description": "Path to data folder containing facility and weather data",
+                    "example": "../data/facility_1"
+                  },
+                  "datapath": {
+                    "type": "string",
+                    "description": "Path to facility data CSV file",
+                    "example": "facility_1_data.csv"
+                  },
+                  "featuresToUse": {
+                    "type": "array",
+                    "description": "Weather features to use for training",
+                    "items": {
+                      "type": "string"
+                    },
+                    "example": [
+                      "temperature_2m_mean",
+                      "precipitation_sum",
+                      "soil_temperature_0_to_7cm_mean",
+                      "soil_moisture_0_to_7cm_mean",
+                      "relative_humidity_2m_mean"
+                    ]
+                  },
+                  "targetName": {
+                    "type": "string",
+                    "description": "Name of the target variable",
+                    "example": "energy_output"
+                  },
+                  "xgbParams": {
+                    "type": "object",
+                    "description": "XGBoost parameters",
+                    "example": {
+                      "nrounds": 10000
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Training successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": { "type": "boolean" },
+                    "message": { "type": "string" },
+                    "modelPath": { "type": "string" },
+                    "accuracy": { "type": "number" },
+                    "trainingTime": { "type": "number" }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": { "type": "string" }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": { "type": "string" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/predict": {
+      "post": {
+        "summary": "Predict energy output",
+        "description": "Generate predictions for future energy output based on weather data",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["folder", "weatherData"],
+                "properties": {
+                  "folder": {
+                    "type": "string",
+                    "description": "Path to data folder containing the trained model",
+                    "example": "../data/facility_1"
+                  },
+                  
+                  "featuresToUse": {
+                    "type": "array",
+                    "description": "Weather features to use for prediction",
+                    "items": {
+                      "type": "string"
+                    },
+                    "example": [
+                      "temperature_2m_mean",
+                      "precipitation_sum",
+                      "soil_temperature_0_to_7cm_mean",
+                      "soil_moisture_0_to_7cm_mean",
+                      "relative_humidity_2m_mean"
+                    ]
+                  },
+                  "modelPath": {
+                    "type": "string",
+                    "description": "Path to the saved model",
+                    "example": "../data/facility_1/xgboost_model.xgb"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Prediction successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": { "type": "boolean" },
+                    "predictions": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "date": { "type": "string" },
+                          "predicted_energy_output": { "type": "number" }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": { "type": "string" }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": { "type": "string" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,128 @@
+{
+  "docusaurus-plugin-content-docs": {
+    "default": {
+      "path": "/",
+      "versions": [
+        {
+          "name": "current",
+          "label": "Next",
+          "isLast": true,
+          "path": "/",
+          "mainDocId": "README",
+          "docs": [
+            {
+              "id": "functions/api-client/dist",
+              "path": "/functions/api-client/dist",
+              "sidebar": "default"
+            },
+            {
+              "id": "functions/call-predict",
+              "path": "/functions/call-predict",
+              "sidebar": "default"
+            },
+            {
+              "id": "functions/export-db-daily-total",
+              "path": "/functions/export-db-daily-total",
+              "sidebar": "default"
+            },
+            {
+              "id": "functions/export-db-status",
+              "path": "/functions/export-db-status",
+              "sidebar": "default"
+            },
+            {
+              "id": "functions/modules",
+              "path": "/functions/modules",
+              "sidebar": "default"
+            },
+            {
+              "id": "functions/README",
+              "path": "/functions/",
+              "sidebar": "default"
+            },
+            {
+              "id": "README",
+              "path": "/"
+            },
+            {
+              "id": "research/Feature Engineering",
+              "path": "/research/Feature Engineering",
+              "sidebar": "default"
+            },
+            {
+              "id": "research/Model Comparison",
+              "path": "/research/Model Comparison",
+              "sidebar": "default"
+            },
+            {
+              "id": "research/Variables Biogas Output",
+              "path": "/research/Variables Biogas Output",
+              "sidebar": "default"
+            },
+            {
+              "id": "research/Weighted_Ensemble_Improvements",
+              "path": "/research/Weighted_Ensemble_Improvements",
+              "sidebar": "default"
+            },
+            {
+              "id": "research/XGBoost Params",
+              "path": "/research/XGBoost Params",
+              "sidebar": "default"
+            }
+          ],
+          "draftIds": [],
+          "sidebars": {
+            "api": {
+              "link": {
+                "path": "/functions/",
+                "label": "functions/README"
+              }
+            },
+            "functions": {
+              "link": {
+                "path": "/functions/",
+                "label": "functions/README"
+              }
+            },
+            "webapp": {
+              "link": {
+                "path": "/functions/",
+                "label": "functions/README"
+              }
+            },
+            "BioGasEng": {
+              "link": {
+                "path": "/functions/",
+                "label": "functions/README"
+              }
+            },
+            "default": {
+              "link": {
+                "path": "/functions/",
+                "label": "functions/README"
+              }
+            }
+          }
+        }
+      ],
+      "breadcrumbs": true
+    }
+  },
+  "docusaurus-plugin-google-gtag": {
+    "default": {
+      "trackingID": [
+        "/////G-E5TZ32BZD"
+      ],
+      "anonymizeIP": false,
+      "id": "default"
+    }
+  },
+  "docusaurus-lunr-search": {
+    "default": {
+      "fileNames": {
+        "searchDoc": "search-doc-1750463822266.json",
+        "lunrIndex": "lunr-index-1750463822266.json"
+      }
+    }
+  }
+}

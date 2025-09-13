@@ -1,0 +1,310 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Stock Predictions API",
+    "version": "1.0.0",
+    "description": "API for generating stock price predictions using machine learning models"
+  },
+  "paths": {
+    "/stocks": {
+      "get": {
+        "summary": "Get list of stocks",
+        "description": "Retrieve list of available stocks from metadata",
+        "responses": {
+          "200": {
+            "description": "List of stocks",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "symbol": { "type": "string" },
+                      "name": { "type": "string" },
+                      "exchange": { "type": "string" },
+                      "sector": { "type": "string" }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "detail": { "type": "string" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/predict": {
+      "post": {
+        "summary": "Generate stock price predictions",
+        "description": "Generate stock price predictions for a given stock symbol and optional custom date range",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["stock_symbol"],
+                "properties": {
+                  "stock_symbol": {
+                    "type": "string",
+                    "description": "Symbol of the stock to predict for"
+                  },
+                  "time_features": {
+                    "type": "boolean",
+                    "description": "Include time-based features",
+                    "default": true
+                  },
+                  "technical_indicators": {
+                    "type": "boolean",
+                    "description": "Include technical indicators",
+                    "default": true
+                  },
+                  "rolling_features": {
+                    "type": "boolean",
+                    "description": "Include rolling window features",
+                    "default": true
+                  },
+                  "lag_features": {
+                    "type": "boolean",
+                    "description": "Include lag features",
+                    "default": true
+                  },
+                  "interaction_features": {
+                    "type": "boolean",
+                    "description": "Include interaction features",
+                    "default": true
+                  },
+                  "windows": {
+                    "type": "array",
+                    "items": { "type": "integer" },
+                    "description": "Rolling window sizes",
+                    "default": [3, 7, 15, 30, 60]
+                  },
+                  "lags": {
+                    "type": "array",
+                    "items": { "type": "integer" },
+                    "description": "Lag periods",
+                    "default": [2, 3, 7, 14, 21, 30, 45, 60]
+                  },
+                  "custom_start_date": {
+                    "type": "string",
+                    "format": "date",
+                    "description": "Custom start date for predictions (optional)"
+                  },
+                  "custom_end_date": {
+                    "type": "string",
+                    "format": "date",
+                    "description": "Custom end date for predictions (optional)"
+                  },
+                  "validation_months": {
+                    "type": "array",
+                    "items": { "type": "string" },
+                    "description": "Months to validate predictions for (optional)"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Predictions generated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "predictions": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "date": { "type": "string" },
+                          "predicted_price": { "type": "number" },
+                          "prophet_prediction": { "type": "number" },
+                          "rf_prediction": { "type": "number" },
+                          "ridge_prediction": { "type": "number" },
+                          "xgb_prediction": { "type": "number" },
+                          "ensemble_prediction": { "type": "number" },
+                          "prediction_lower": { "type": "number" },
+                          "prediction_upper": { "type": "number" },
+                          "actual_price": { "type": "number", "nullable": true },
+                          "error": { "type": "number", "nullable": true },
+                          "percent_error": { "type": "number", "nullable": true },
+                          "model_weights": {
+                            "type": "object",
+                            "properties": {
+                              "prophet_weight": { "type": "number" },
+                              "rf_weight": { "type": "number" },
+                              "ridge_weight": { "type": "number" },
+                              "xgb_weight": { "type": "number" }
+                            }
+                          },
+                          "technical_data": {
+                            "type": "object",
+                            "properties": {
+                              "rsi": { "type": "number", "nullable": true },
+                              "macd": { "type": "number", "nullable": true }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "cross_validation_results": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "model": { "type": "string" },
+                          "mae": { "type": "number" },
+                          "rmse": { "type": "number" },
+                          "r2_score": { "type": "number", "nullable": true },
+                          "accuracy": { "type": "number", "nullable": true },
+                          "weight": { "type": "number" }
+                        }
+                      }
+                    },
+                    "validation_results": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "model": { "type": "string" },
+                          "mae": { "type": "number", "nullable": true },
+                          "rmse": { "type": "number", "nullable": true },
+                          "r2_score": { "type": "number", "nullable": true },
+                          "accuracy": { "type": "number", "nullable": true }
+                        }
+                      }
+                    },
+                    "feature_config": { "type": "object" },
+                    "ensemble_weights": { "type": "object" },
+                    "custom_predictions_saved": { "type": "boolean" },
+                    "custom_date_range": {
+                      "type": "object",
+                      "nullable": true,
+                      "properties": {
+                        "start_date": { "type": "string" },
+                        "end_date": { "type": "string" }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "detail": { "type": "string" },
+                    "error_type": { "type": "string" },
+                    "path": { "type": "string" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/predict-90-days": {
+      "post": {
+        "summary": "Generate 90-day predictions for all stocks",
+        "description": "Generate predictions for the next 90 days for all stocks in the metadata. Predictions are saved to CSV files in each stock's data folder.",
+        "responses": {
+          "200": {
+            "description": "90-day predictions generated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "total_stocks": { "type": "integer" },
+                    "processed_stocks": { "type": "integer" },
+                    "successful_predictions": { "type": "integer" },
+                    "failed_stocks": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "stock_symbol": { "type": "string" },
+                          "reason": { "type": "string" }
+                        }
+                      }
+                    },
+                    "stock_results": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "stock_symbol": { "type": "string" },
+                          "predictions_count": { "type": "integer" },
+                          "date_range": { "type": "string" },
+                          "csv_file": { "type": "string" }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No stocks found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "detail": { "type": "string" }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "detail": { "type": "string" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/docs": {
+      "get": {
+        "summary": "API Documentation",
+        "description": "Get the Swagger UI documentation for the API",
+        "responses": {
+          "200": {
+            "description": "HTML documentation page"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "/-b76": {
+    "__comp": "5e95c892",
+    "__context": {
+      "plugin": "aba21aa0"
+    }
+  },
+  "/-9e7": {
+    "__comp": "a7bd4aaa",
+    "__props": "22dd74f7"
+  },
+  "/-e4e": {
+    "__comp": "a94703ab"
+  },
+  "/functions/-736": {
+    "__comp": "17896441",
+    "content": "1b684a56"
+  },
+  "/functions/api-client/dist-e6c": {
+    "__comp": "17896441",
+    "content": "8a381396"
+  },
+  "/functions/call-predict-d02": {
+    "__comp": "17896441",
+    "content": "8dfb4d1f"
+  },
+  "/functions/export-db-daily-total-94d": {
+    "__comp": "17896441",
+    "content": "ca5e5c37"
+  },
+  "/functions/export-db-status-149": {
+    "__comp": "17896441",
+    "content": "4e391168"
+  },
+  "/functions/modules-563": {
+    "__comp": "17896441",
+    "content": "5005ecd6"
+  },
+  "/research/Feature Engineering-65e": {
+    "__comp": "17896441",
+    "content": "41ff8966"
+  },
+  "/research/Model Comparison-3b5": {
+    "__comp": "17896441",
+    "content": "c0b8534b"
+  },
+  "/research/Variables Biogas Output-b46": {
+    "__comp": "17896441",
+    "content": "8f8fb2a6"
+  },
+  "/research/Weighted_Ensemble_Improvements-f36": {
+    "__comp": "17896441",
+    "content": "99edae29"
+  },
+  "/research/XGBoost Params-d76": {
+    "__comp": "17896441",
+    "content": "1ef33ba3"
+  },
+  "/-48d": {
+    "__comp": "17896441",
+    "content": "23374ca6"
+  }
+}

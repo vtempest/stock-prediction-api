@@ -1,0 +1,23 @@
+{
+  "id": "research/Model Comparison",
+  "title": "Comparison of Prediction Models",
+  "description": "XGBoost, Prophet, Random Forest, and Ridge Regression",
+  "source": "@site/docs/research/Model Comparison.md",
+  "sourceDirName": "research",
+  "slug": "/research/Model Comparison",
+  "permalink": "/research/Model Comparison",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "default",
+  "previous": {
+    "title": "Feature Engineering",
+    "permalink": "/research/Feature Engineering"
+  },
+  "next": {
+    "title": "Variables in Biogas Prediction (Case Studies)",
+    "permalink": "/research/Variables Biogas Output"
+  }
+}

@@ -1,0 +1,85 @@
+services:
+ 
+  python-app:
+    container_name: prediction 
+    build:
+      context: ./prediction-api
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - PYTHONPATH=/app
+      - PYTHONUNBUFFERED=1
+    volumes:
+      - ./prediction-api:/app
+      - ./data:/data
+      - ./prediction-api-client/openapi-schema.json:/app/openapi-schema.json
+    working_dir: /app
+    command: uv run main.py --host 0.0.0.0 --port 8000 --reload
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+
+
+  charts:
+    image: nginx:alpine
+    container_name: charts 
+    ports:
+      - "8089:80"
+    volumes:
+      - ./web/visualizations:/usr/share/nginx/html/:ro
+    networks:
+      - caddy
+    labels:
+      caddy: biogas-charts.appdemo.site
+      caddy.reverse_proxy: "{{upstreams 80}}"
+
+
+ 
+  # Caddy - proxy server router for containers 
+  # sudo docker network create caddy
+  caddy:  
+    container_name: caddy
+    image: lucaslorentz/caddy-docker-proxy:ci-alpine
+    ports:
+      - 8087:80
+      - 443:443
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /var/lib/caddy/data:/data
+    restart: unless-stopped
+    environment:
+      - CADDY_INGRESS_NETWORKS=caddy
+    networks:
+      - caddy
+
+ # code-server:
+  #   image: lscr.io/linuxserver/code-server:latest
+  #   container_name: code-server
+  #   environment:
+  #     - PUID=1000
+  #     - PGID=1000
+  #     - TZ=Etc/UTC
+  #     # - PASSWORD=password         # Optional: set a password for login
+  #     # - HASHED_PASSWORD=          # Optional: use a hashed password
+  #     - SUDO_PASSWORD=passwd    # Optional: sudo password
+  #     # - SUDO_PASSWORD_HASH=       # Optional: hashed sudo password
+  #     # - PROXY_DOMAIN=code-server.my.domain # Optional: for reverse proxy
+  #     # - DEFAULT_WORKSPACE=/config/workspace # Optional: default workspace
+  #   ports:
+  #     - 8443:8443
+  #   restart: unless-stopped
+  #   networks:
+  #     - caddy
+  #   labels:
+  #     caddy: code.appdemo.site
+  #     caddy.reverse_proxy: "{{upstreams 8443}}"
+  
+
+networks:
+  caddy:
+    external: true

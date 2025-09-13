@@ -1,0 +1,22 @@
+{
+  "name": "prepare-data",
+  "version": "1.0.0",
+  "description": "Prepare data - gen energy totals and weather data",
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "predictions:exec": "bun run prediction-test/call-predict.js",
+    "predictions:sum": "bun run prediction-test/consolidate-accuracy.js",
+    "predictions:server": "sudo docker compose up ",
+    "totals": "bun run prepare-data/get-db-daily-totals.ts"
+  },
+  "dependencies": {
+    "drizzle-orm": "^0.44.2",
+    "postgres": "^3.4.7",
+    "yahoo-finance2": "^2.13.3"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "bun": "^1.2.2"
+  }
+}

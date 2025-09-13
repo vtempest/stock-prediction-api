@@ -1,0 +1,23 @@
+{
+  "id": "functions/api-client/dist",
+  "title": "dist",
+  "description": "Documentation / api-client/dist",
+  "source": "@site/docs/functions/api-client/dist.md",
+  "sourceDirName": "functions/api-client",
+  "slug": "/functions/api-client/dist",
+  "permalink": "/functions/api-client/dist",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "default",
+  "previous": {
+    "title": "Energy Prediction System",
+    "permalink": "/functions/"
+  },
+  "next": {
+    "title": "call-predict",
+    "permalink": "/functions/call-predict"
+  }
+}

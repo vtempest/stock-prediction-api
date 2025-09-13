@@ -1,0 +1,15 @@
+[project]
+name = "predict"
+version = "0.1.0"
+description = "Prediction server"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "prophet>=1.1.7",
+    "scikit-learn>=1.7.0",
+    "xgboost>=3.0.2",
+    "uvicorn>=0.34.3",
+    "fastapi>=0.115.12",
+    "pandas>=2.3.0",
+    "plotly>=6.1.2",
+]

@@ -1,0 +1,14 @@
+{
+  "id": "README",
+  "title": "Energy Prediction System",
+  "description": "logo",
+  "source": "@site/docs/README.md",
+  "sourceDirName": ".",
+  "slug": "/",
+  "permalink": "/",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {}
+}
